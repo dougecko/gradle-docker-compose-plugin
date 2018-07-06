@@ -59,6 +59,7 @@ class ComposeUp extends DefaultTask {
             args += settings.upAdditionalArgs
         }
         args += settings.startedServices
+        args += settings.upFinalArgs
         try {
             settings.composeExecutor.execute(args)
             startCapturing()
