@@ -45,6 +45,7 @@ class ComposeDownForced extends DefaultTask {
                     }
                     args += settings.downAdditionalArgs
                 }
+                args += settings.downFinalArgs
                 settings.composeExecutor.execute(args)
             } else {
                 if (!settings.startedServices.empty) {
