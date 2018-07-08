@@ -3,6 +3,7 @@ package com.avast.gradle.dockercompose
 import com.avast.gradle.dockercompose.tasks.ComposeBuild
 import com.avast.gradle.dockercompose.tasks.ComposeDown
 import com.avast.gradle.dockercompose.tasks.ComposeDownForced
+import com.avast.gradle.dockercompose.tasks.ComposeLogs
 import com.avast.gradle.dockercompose.tasks.ComposePull
 import com.avast.gradle.dockercompose.tasks.ComposeUp
 import com.avast.gradle.dockercompose.tasks.ServiceInfoCache
@@ -21,6 +22,7 @@ class ComposeSettings {
     final ComposeDownForced downForcedTask
     final ComposeBuild buildTask
     final ComposePull pullTask
+    final ComposeLogs logsTask
     final Project project
     final DockerExecutor dockerExecutor
     final ComposeExecutor composeExecutor
@@ -45,7 +47,6 @@ class ComposeSettings {
     List<String> buildAdditionalArgs = []
     List<String> pullAdditionalArgs = []
     List<String> upAdditionalArgs = []
-    List<String> upFinalArgs = []
     List<String> downAdditionalArgs = []
     List<String> downFinalArgs = []
     String projectName = null
@@ -65,6 +66,9 @@ class ComposeSettings {
     String dockerComposeWorkingDirectory = null
     Duration dockerComposeStopTimeout = Duration.ofSeconds(10)
 
+    String composeLog = null
+    String containerLogDir = null
+
     ComposeSettings(Project project, String name = '') {
         this.project = project
 
@@ -78,6 +82,8 @@ class ComposeSettings {
         downTask.settings = this
         downForcedTask = project.tasks.create(name ? "${name}ComposeDownForced" : 'composeDownForced', ComposeDownForced)
         downForcedTask.settings = this
+        logsTask = project.tasks.create(name ? "${name}ComposeLogs" : 'composeLogs', ComposeLogs)
+        logsTask.settings = this
 
         this.dockerExecutor = new DockerExecutor(this)
         this.composeExecutor = new ComposeExecutor(this)
