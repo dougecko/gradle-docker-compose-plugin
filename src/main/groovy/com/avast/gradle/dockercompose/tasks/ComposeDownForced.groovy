@@ -45,7 +45,6 @@ class ComposeDownForced extends DefaultTask {
                     }
                     args += settings.downAdditionalArgs
                 }
-                args += settings.downFinalArgs
                 def composeLog = settings.composeLog ? new FileOutputStream(settings.composeLog) : null
                 settings.composeExecutor.executeWithCustomOutput(composeLog, false, args)
             } else {

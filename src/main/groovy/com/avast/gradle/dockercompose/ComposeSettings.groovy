@@ -48,7 +48,6 @@ class ComposeSettings {
     List<String> pullAdditionalArgs = []
     List<String> upAdditionalArgs = []
     List<String> downAdditionalArgs = []
-    List<String> downFinalArgs = []
     String projectName = null
 
     boolean stopContainers = true
